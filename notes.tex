@@ -1,0 +1,65 @@
+\documentclass{article}
+\usepackage{xparse}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{biblatex}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{booktabs} %FOR TABLES
+\usepackage[table]{xcolor} %FOR TABLES
+\usepackage{calc}
+\usepackage[a4paper,top=2cm, bottom=2cm, right=2cm, left=2cm]{geometry}
+\addbibresource{bibfile.bib}
+
+% Define typographic struts, as suggested by Claudio Beccari
+%   in an article in TeX and TUG News, Vol. 2, 1993.
+% https://tex.stackexchange.com/a/65130
+\newcommand\Tstrut{\rule{0pt}{2.6ex}}         % = `top' strut
+\newcommand\Bstrut{\rule[-0.9ex]{0pt}{0pt}}   % = `bottom' strut
+
+\newcommand{\citeread}[9]{%
+\noindent
+\begin{tabularx}{\textwidth}{|l|}
+    \hline
+    \rowcolor{lightgray} \textbf{\citefield{#1}{title}} \tabularnewline[0.75em] \hline
+    \multicolumn{1}{@{}l@{}}{
+        \begin{tabularx}{\textwidth}{|X|c|c|}
+            \citeauthor{#1} & \citefield{#1}{year} & #2
+        \end{tabularx}
+    } \\ \hline
+    \citefield{#1}{journaltitle} \\ \hline
+    #3 \\ \hline
+    \multicolumn{1}{@{}l@{}}{
+        \begin{tabularx}{\textwidth}{|X|X|}
+            #4 & 
+            \multirow{2}{=}{#5} \\ \cline{1-1}
+            #6 & 
+        \end{tabularx}
+    } \\ \hline
+    \multicolumn{1}{@{}l@{}}{
+        \begin{tabularx}{\textwidth}{|X|X|}
+            #7 & #8
+        \end{tabularx}
+    } \\ \hline
+    #9 \\ \hline
+\end{tabularx}
+}
+
+\def\arraystretch{1.2}
+% \setlength{\tabcolsep}{0.25cm}
+\begin{document}
+
+\citeread{knuth1984texbook}
+{I am Num}
+{I am Configuration}
+{I am Parameters}
+{I am Main conclusions}
+{I am Novelties}
+{I am Future possibilities}
+{I am NOTES}
+{I am words of wistom}
+
+
+\printbibliography
+
+\end{document}
